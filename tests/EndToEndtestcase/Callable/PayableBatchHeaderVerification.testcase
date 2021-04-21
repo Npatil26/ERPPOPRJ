@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<testCase registryId="3a3fd54e-7208-45d3-a39e-fee0eff06e88" visibility="Internal">
+  <summary/>
+  <steps>
+    <apiCall apiId="com.provar.plugins.forcedotcom.core.testapis.ApexConnect" name="ApexConnect" testItemId="1" title="Salesforce Connect: QARSFAdmin (Test)">
+      <arguments>
+        <argument id="connectionName">
+          <value class="value" valueClass="string">QARSFAdmin</value>
+        </argument>
+        <argument id="resultName">
+          <value class="value" valueClass="string">QARSFAdmin</value>
+        </argument>
+        <argument id="resultScope">
+          <value class="value" valueClass="string">Test</value>
+        </argument>
+        <argument id="uiApplicationName">
+          <value class="value" valueClass="string">Rootstock_Financials</value>
+        </argument>
+        <argument id="quickUiLogin">
+          <value class="value" valueClass="boolean">true</value>
+        </argument>
+        <argument id="closeAllPrimaryTabs">
+          <value class="value" valueClass="boolean">true</value>
+        </argument>
+        <argument argId="eaada2ea-1217-44e1-bc13-5cc74f1bc5af" id="reuseConnectionName">
+          <value class="variable">
+            <path element="reuseConnectionName"/>
+          </value>
+        </argument>
+        <argument id="alreadyOpenBehaviour">
+          <value class="value" valueClass="string">Reuse</value>
+        </argument>
+        <argument id="privateBrowsingMode"/>
+        <argument id="enableObjectIdLogging">
+          <value class="value" valueClass="boolean">true</value>
+        </argument>
+        <argument id="autoCleanup"/>
+        <argument id="cleanupConnectionName"/>
+        <argument id="logFileLocation"/>
+        <argument id="username"/>
+        <argument id="password"/>
+        <argument id="securityToken"/>
+        <argument id="environment"/>
+        <argument id="lightningMode">
+          <value class="value" valueClass="string">default</value>
+        </argument>
+        <argument id="webBrowser"/>
+      </arguments>
+    </apiCall>
+    <apiCall apiId="com.provar.plugins.forcedotcom.core.testapis.ApexSoqlQuery" name="ApexSoqlQuery" testItemId="2" title="SOQL Query: select Id,Name,rstk__ttaphdr_batchno__c,rstk__ttaphdr_dimvals__c,rstk__ttaphdr_invoice_status__c from rstk__ttaphdr__c where Name like '{INVNO}%' and rstk__ttaphdr_batchno__c = {BATCHNUM}=&gt;ttaphdr">
+      <arguments>
+        <argument argId="d73a0fa6-8bef-490d-85af-469fe8643cec" id="soqlQuery">
+          <value class="compound">
+            <parts>
+              <value valueClass="string">select Id,Name,rstk__ttaphdr_batchno__c,rstk__ttaphdr_dimvals__c,rstk__ttaphdr_invoice_status__c from rstk__ttaphdr__c where Name like '</value>
+              <variable>
+                <path element="INVNO"/>
+              </variable>
+              <value valueClass="string">%' and rstk__ttaphdr_batchno__c = </value>
+              <variable>
+                <path element="BATCHNUM"/>
+              </variable>
+            </parts>
+          </value>
+        </argument>
+        <argument id="apexConnectionName">
+          <value class="value" valueClass="string">QARSFAdmin</value>
+        </argument>
+        <argument argId="923f3eb5-eea5-4173-b7ed-bf60a1ff8177" id="resultListName">
+          <value class="value" valueClass="string">ttaphdr</value>
+        </argument>
+        <argument id="resultScope">
+          <value class="value" valueClass="string">Test</value>
+        </argument>
+      </arguments>
+    </apiCall>
+    <apiCall apiId="com.provar.plugins.forcedotcom.core.testapis.ApexSoqlQuery" name="ApexSoqlQuery" testItemId="6" title="SOQL Query: select Id,Name from rstk__dimvals__c where Id = '{ttaphdr.rstk__ttaphdr_dimvals__c}'=&gt;dimvals">
+      <arguments>
+        <argument id="soqlQuery">
+          <value class="compound">
+            <parts>
+              <value valueClass="string">select Id,Name from rstk__dimvals__c where Id = '</value>
+              <variable>
+                <path element="ttaphdr"/>
+                <path element="rstk__ttaphdr_dimvals__c"/>
+              </variable>
+              <value valueClass="string">'</value>
+            </parts>
+          </value>
+        </argument>
+        <argument id="apexConnectionName">
+          <value class="value" valueClass="string">QARSFAdmin</value>
+        </argument>
+        <argument id="resultListName">
+          <value class="value" valueClass="string">dimvals</value>
+        </argument>
+        <argument id="resultScope">
+          <value class="value" valueClass="string">Test</value>
+        </argument>
+      </arguments>
+    </apiCall>
+    <apiCall apiId="com.provar.plugins.bundled.apis.AssertValues" name="AssertValues" testItemId="3" title="Assert: {ExpectedDimVal[5].InvDimval} EqualTo {dimvals.Name}">
+      <arguments>
+        <argument argId="811038e4-befa-452c-a36d-ff7d4f5ca0df" id="expectedValue">
+          <value class="variable">
+            <path element="ExpectedDimVal">
+              <filter class="index">
+                <index valueClass="decimal">4</index>
+              </filter>
+            </path>
+            <path element="InvDimval"/>
+          </value>
+        </argument>
+        <argument id="actualValue">
+          <value class="variable">
+            <path element="dimvals"/>
+            <path element="Name"/>
+          </value>
+        </argument>
+        <argument id="comparisonType">
+          <value class="value" valueClass="string">EqualTo</value>
+        </argument>
+        <argument id="caseSensitive">
+          <value class="value" valueClass="boolean">true</value>
+        </argument>
+        <argument id="numeric">
+          <value class="value" valueClass="boolean">false</value>
+        </argument>
+        <argument id="retainDecimals">
+          <value class="value" valueClass="boolean">false</value>
+        </argument>
+        <argument id="nullGreater">
+          <value class="value" valueClass="boolean">false</value>
+        </argument>
+        <argument id="matchMultiLine">
+          <value class="value" valueClass="boolean">false</value>
+        </argument>
+        <argument id="matchDotAll">
+          <value class="value" valueClass="boolean">false</value>
+        </argument>
+        <argument id="failureMessage">
+          <value class="value" valueClass="string">Invoice Header Dimension Value is not correct</value>
+        </argument>
+      </arguments>
+    </apiCall>
+  </steps>
+  <params>
+    <param linkedToUrl="provar:hasvalue:eaada2ea-1217-44e1-bc13-5cc74f1bc5af" name="reuseConnectionName" title="Override Connection">
+      <summary>The name of an already opened connect to re-use.</summary>
+      <type>
+        <connectionType>
+          <constraints>
+            <valueConstraint name="variableName">true</valueConstraint>
+            <valueConstraint name="requiredCapabilities">sfSoapConnect</valueConstraint>
+          </constraints>
+        </connectionType>
+      </type>
+    </param>
+    <param name="INVNO" title="INVNO">
+      <summary>The Apex code to be executed.</summary>
+      <type>
+        <textType>
+          <constraints>
+            <valueConstraint name="minLength">0</valueConstraint>
+            <valueConstraint name="maxLength">9999</valueConstraint>
+            <valueConstraint name="regex"/>
+          </constraints>
+        </textType>
+      </type>
+    </param>
+    <param name="BATCHNUM" title="BATCHNUM">
+      <summary/>
+      <type>
+        <textType>
+          <constraints>
+            <valueConstraint name="minLength">0</valueConstraint>
+            <valueConstraint name="maxLength">9999</valueConstraint>
+            <valueConstraint name="regex"/>
+          </constraints>
+        </textType>
+      </type>
+    </param>
+    <param name="ExpectedDimVal" title="ExpectedDimVal">
+      <summary>The value that is expected.</summary>
+      <type>
+        <textType>
+          <constraints>
+            <valueConstraint name="minLength">0</valueConstraint>
+            <valueConstraint name="maxLength">9999</valueConstraint>
+            <valueConstraint name="regex"/>
+          </constraints>
+        </textType>
+      </type>
+    </param>
+  </params>
+  <args>
+    <argument id="reuseConnectionName">
+      <value class="variable">
+        <path element="reuseConnectionName"/>
+      </value>
+    </argument>
+    <argument id="INVNO">
+      <value class="variable">
+        <path element="InvoiceNum"/>
+      </value>
+    </argument>
+    <argument id="ExpectedDimVal">
+      <value class="variable">
+        <path element="ExpectedDimVal"/>
+        <path element="InvDimval"/>
+      </value>
+    </argument>
+    <argument id="BATCHNUM">
+      <value class="variable">
+        <path element="BatchNo"/>
+      </value>
+    </argument>
+  </args>
+</testCase>
